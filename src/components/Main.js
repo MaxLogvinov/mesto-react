@@ -14,14 +14,7 @@ function Main(props) {
         setUserName(data.name);
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
-        setCards(
-          cards.map((card) => ({
-            likes: card.likes,
-            link: card.link,
-            name: card.name,
-            cardId: card._id,
-          }))
-        );
+        setCards(cards);
       })
       .catch((err) => {
         console.log(err);
@@ -62,14 +55,7 @@ function Main(props) {
       </section>
       <section className="elements">
         {cards.map((card) => (
-          <Card
-            link={card.link}
-            name={card.name}
-            likes={card.likes}
-            key={card.cardId}
-            card={card}
-            onCardClick={props.onCardClick}
-          />
+          <Card key={card._id} card={card} onCardClick={props.onCardClick} />
         ))}
       </section>
     </main>
