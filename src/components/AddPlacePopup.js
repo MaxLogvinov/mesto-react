@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm ';
 
 function AddPlacePopup(props) {
@@ -19,8 +20,14 @@ function AddPlacePopup(props) {
       name: place,
       link: link,
     });
-    e.target.reset();
+    // e.target.reset();
   }
+
+  useEffect(() => {
+    setPlace('');
+    setLink('');
+  }, [props.isOpen]);
+
   return (
     <PopupWithForm
       name="add"
@@ -40,6 +47,7 @@ function AddPlacePopup(props) {
         minLength="2"
         maxLength="30"
         onChange={handleAddPlaceName}
+        value={place}
       />
       <span className="popup__input-error place-error"></span>
       <input
@@ -50,6 +58,7 @@ function AddPlacePopup(props) {
         required
         type="url"
         onChange={handleAddPlaceLink}
+        value={link}
       />
       <span className="popup__input-error link-error"></span>
     </PopupWithForm>
